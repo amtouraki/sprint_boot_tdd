@@ -1,5 +1,7 @@
 pipeline {
-	agent any stages {
+	agent any
+
+	stages {
 		stage('GitHub') {
 			steps {
 			    // Get some code from a GitHub repository
