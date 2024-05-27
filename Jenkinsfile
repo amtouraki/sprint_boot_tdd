@@ -1,6 +1,11 @@
 pipeline {
 	agent any
 
+    environment {
+        registry = "matotouraki/demo-devsecops"
+        registryCredential = 'docker-hub'
+    }
+
 	stages {
 		stage('GitHub') {
 			steps {
