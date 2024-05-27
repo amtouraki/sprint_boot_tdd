@@ -28,5 +28,21 @@ pipeline {
 			    }
 			}
 		}
+
+		stage('Docker Build and Push') {
+			steps {
+				withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+				    sh 'printenv'
+				    sh 'docker build -t $registry:$BUILD_NUMBER .'
+				    sh 'docker push $registry:$BUILD_NUMBER'
+				}
+			}
+		}
+
+		stage('Remove Unused docker image') {
+			steps {
+				sh "docker rmi $registry:$BUILD_NUMBER"
+			}
+		}
 	}
 }
